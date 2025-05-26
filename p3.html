@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>College Student Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      background-color: #34495e;
+    }
+    nav a {
+      padding: 10px 15px;
+      display: block;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background-color: #2c3e50;
+    }
+    section {
+      padding: 20px;
+      margin: 10px;
+      background-color: white;
+      border-radius: 8px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    textarea, input, button {
+      display: block;
+      margin: 10px 0;
+      padding: 8px;
+      width: 100%;
+      max-width: 500px;
+    }
+    button {
+      background-color: #2c3e50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button:hover {
+      background-color: #1a242f;
+    }
+    .dark-mode {
+      background-color: #1c1c1c;
+      color: #ddd;
+    }
+    .dark-mode header, .dark-mode nav {
+      background-color: #111;
+    }
+    .dark-mode nav a {
+      color: #ddd;
+    }
+    .dark-mode section {
+      background-color: #222;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎓 College Student Dashboard</h1>
+    <button onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+  </header>
+
+  <nav>
+    <a href="#attendance">Attendance</a>
+    <a href="#bunks">Bunk Manager</a>
+    <a href="#tasks">Assignments</a>
+    <a href="#timetable">Timetable</a>
+    <a href="#events">Events</a>
+    <a href="#notes">Notes</a>
+    <a href="#resources">Resources</a>
+  </nav>
+
+  <main>
+    <section id="attendance">
+      <h2>📊 Attendance Tracker</h2>
+      <input type="number" id="totalClasses" placeholder="Total Classes" />
+      <input type="number" id="attendedClasses" placeholder="Attended Classes" />
+      <button onclick="calculateAttendance()">Calculate</button>
+      <p id="attendanceResult"></p>
+    </section>
+
+    <section id="bunks">
+      <h2>🚫 Bunk Manager</h2>
+      <p id="bunkStatus"></p>
+    </section>
+
+    <section id="tasks">
+      <h2>📚 Assignments</h2>
+      <textarea id="taskInput" placeholder="List your tasks or assignments here..."></textarea>
+      <button onclick="saveTask()">Save Tasks</button>
+      <div id="taskDisplay"></div>
+    </section>
+
+    <section id="timetable">
+      <h2>🗓️ Timetable</h2>
+      <textarea id="timetableInput" placeholder="Enter your timetable..."></textarea>
+      <button onclick="saveTimetable()">Save Timetable</button>
+      <div id="timetableDisplay"></div>
+    </section>
+
+    <section id="events">
+      <h2>🎉 Upcoming Events</h2>
+      <textarea id="eventInput" placeholder="Enter upcoming events..."></textarea>
+      <button onclick="saveEvents()">Save Events</button>
+      <div id="eventDisplay"></div>
+    </section>
+
+    <section id="notes">
+      <h2>📝 Notes</h2>
+      <textarea id="notesInput" placeholder="Take quick notes..."></textarea>
+      <button onclick="saveNotes()">Save Notes</button>
+      <div id="notesDisplay"></div>
+    </section>
+
+    <section id="resources">
+      <h2>🌐 Useful Links</h2>
+      <ul>
+        <li><a href="https://github.com/Manav32478/Internship-Tasks.git" target="_blank">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/" target="_blank">Portfolio</a></li>
+        <li><a href="https://www.vaishnavtech.in/myaccount/#/classes" target="_blank">Internship Page</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    function calculateAttendance() {
+      const total = parseInt(document.getElementById('totalClasses').value);
+      const attended = parseInt(document.getElementById('attendedClasses').value);
+      const result = document.getElementById('attendanceResult');
+      const bunkStatus = document.getElementById('bunkStatus');
+
+      if (!isNaN(total) && !isNaN(attended) && total > 0) {
+        const percentage = (attended / total) * 100;
+        result.textContent = `Attendance: ${percentage.toFixed(2)}%`;
+
+        if (percentage >= 75) {
+          const maxBunks = Math.floor((attended / 0.75) - total);
+          bunkStatus.textContent = `✅ You're safe! You can still bunk ${maxBunks} classes.`;
+        } else {
+          bunkStatus.textContent = `⚠️ You need to attend more classes to maintain 75%.`;
+        }
+
+        localStorage.setItem('totalClasses', total);
+        localStorage.setItem('attendedClasses', attended);
+      } else {
+        result.textContent = 'Please enter valid numbers.';
+      }
+    }
+
+    function saveTask() {
+      const task = document.getElementById('taskInput').value;
+      localStorage.setItem('tasks', task);
+      loadTask();
+    }
+
+    function saveTimetable() {
+      const tt = document.getElementById('timetableInput').value;
+      localStorage.setItem('timetable', tt);
+      loadTimetable();
+    }
+
+    function saveEvents() {
+      const events = document.getElementById('eventInput').value;
+      localStorage.setItem('events', events);
+      loadEvents();
+    }
+
+    function saveNotes() {
+      const notes = document.getElementById('notesInput').value;
+      localStorage.setItem('notes', notes);
+      loadNotes();
+    }
+
+    function loadTask() {
+      document.getElementById('taskDisplay').textContent = localStorage.getItem('tasks') || '';
+    }
+
+    function loadTimetable() {
+      document.getElementById('timetableDisplay').textContent = localStorage.getItem('timetable') || '';
+    }
+
+    function loadEvents() {
+      document.getElementById('eventDisplay').textContent = localStorage.getItem('events') || '';
+    }
+
+    function loadNotes() {
+      document.getElementById('notesDisplay').textContent = localStorage.getItem('notes') || '';
+    }
+
+    function loadAttendance() {
+      const total = localStorage.getItem('totalClasses');
+      const attended = localStorage.getItem('attendedClasses');
+      if (total && attended) {
+        document.getElementById('totalClasses').value = total;
+        document.getElementById('attendedClasses').value = attended;
+        calculateAttendance();
+      }
+    }
+
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
+    window.onload = function () {
+      loadAttendance();
+      loadTask();
+      loadTimetable();
+      loadEvents();
+      loadNotes();
+    };
+  </script>
+</body>
+</html>
