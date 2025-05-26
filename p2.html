@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Internship Task Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        h2 {
+            color: #333;
+        }
+        .links a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .task-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task-item {
+            background-color: white;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .task-item.done {
+            background-color: #d4edda;
+        }
+        .task-item button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .task-item button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Internship Task Tracker</h1>
+    </header>
+    <div class="container">
+        <section class="links">
+            <h2>Quick Links</h2>
+            <a href="https://www.vaishnavtech.in/myaccount/#/course/100247/lesson/940195?lesson=940195&lesson_type=material&section=259564&subject=267404" target="_blank">Internship Page</a>
+            <a href="https://github.com/yourusername/your-repo" target="_blank">GitHub Repository</a>
+            <a href="https://your-portfolio.com" target="_blank">My Portfolio</a>
+        </section>
+
+        <section class="tasks">
+            <h2>Today's Tasks</h2>
+            <ul class="task-list" id="taskList">
+                <!-- Tasks will be dynamically added here -->
+            </ul>
+            <button onclick="addTask()">Add Task</button>
+        </section>
+    </div>
+
+    <script>
+        // Sample tasks
+        const tasks = [
+            { id: 1, name: 'Complete internship report', time: '10:00', done: false },
+            { id: 2, name: 'Attend team meeting', time: '14:00', done: false },
+            { id: 3, name: 'Update project documentation', time: '16:00', done: false }
+        ];
+
+        // Function to render tasks
+        function renderTasks() {
+            const taskList = document.getElementById('taskList');
+            taskList.innerHTML = ''; // Clear current tasks
+
+            tasks.forEach(task => {
+                const li = document.createElement('li');
+                li.className = 'task-item' + (task.done ? ' done' : '');
+                li.innerHTML = `
+                    <span>${task.name} - ${task.time}</span>
+                    <button onclick="toggleTask(${task.id})">${task.done ? 'Undo' : 'Done'}</button>
+                `;
+                taskList.appendChild(li);
+            });
+        }
+
+        // Function to toggle task completion
+        function toggleTask(id) {
+            const task = tasks.find(task => task.id === id);
+            if (task) {
+                task.done = !task.done;
+                renderTasks();
+            }
+        }
+
+        // Function to add a new task
+        function addTask() {
+            const taskName = prompt('Enter task name:');
+            const taskTime = prompt('Enter task time (HH:MM):');
+            if (taskName && taskTime) {
+                const newTask = {
+                    id: tasks.length + 1,
+                    name: taskName,
+                    time: taskTime,
+                    done: false
+                };
+                tasks.push(newTask);
+                renderTasks();
+            }
+        }
+
+        // Function to check for upcoming tasks and set alarms
+        function checkTasks() {
+            const now = new Date();
+            tasks.forEach(task => {
+                const taskTime = new Date();
+                const [hours, minutes] = task.time.split(':').map(num => parseInt(num));
+                taskTime.setHours(hours, minutes, 0, 0);
+
+                if (!task.done && taskTime > now && taskTime - now <= 5 * 60 * 1000) {
+                    alert(`Reminder: ${task.name} is coming up at ${task.time}`);
+                }
+            });
+        }
+
+        // Initialize the task list and check for tasks every minute
+        renderTasks();
+        setInterval(checkTasks, 60 * 1000); // Check every minute
+    </script>
+</body>
+</html>
