@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color: black;
+            background-color: lightgray;
+            border-radius: 20px;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div>Example for JS</div>
+</body>
+<script>
+let name = "Aadit";
+let age = 19;
+let isStudent = true;
+console.log("Name:", name);
+console.log("Age:", age);
+console.log("Is student:", isStudent);
+
+let n1 = 10;
+let n2 = 5;
+let sum = n1 + n2;
+console.log("Sum of num1 and num2 is:", sum);
+
+let firstName = "Aadit";
+let lastName = "Shah";
+let fullName = firstName + " " + lastName;
+console.log("Full Name:", fullName);
+
+const PI = 3.14159;
+console.log("Value of PI:", PI);
+
+let isSunny = false;
+if (isSunny) {
+  console.log("It's sunny outside! ☀️");
+} else {
+  console.log("It's not sunny today. ☁️");
+}
+
+let fruits = ["Apple", "Banana", "Cherry"];
+console.log("Second fruit:", fruits[1]);
+fruits.push("Mango");
+console.log("Updated fruit list:", fruits);
+
+let person = {
+  name: "Aadit",
+  age: 19
+};
+console.log("Person's Name:", person.name);
+console.log("Person's Age:", person.age);
+
+let gvar = "I am global";
+
+function testScope() {
+  let lvar = "I am local";
+  console.log("Inside function - Global Var:", gvar);
+  console.log("Inside function - Local Var:", lvar);
+}
+testScope();
+
+let sampleData = 123.45;
+console.log("Data type of sampleData is:", typeof sampleData);
+
+let counter = 5;
+console.log("Orignal value:",counter);
+counter += 1;
+console.log("Updated counter value:", counter);
+
+</script>
+</html>
