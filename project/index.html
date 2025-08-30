@@ -189,6 +189,23 @@
     /* --- SCROLL-TO-TOP --- */
     .to-top{position:fixed;right:1rem;bottom:1rem;z-index:1200;opacity:0;pointer-events:none;transition:.3s ease}
     .to-top.show{opacity:1;pointer-events:auto}
+    .cert:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+.cert img {
+  transition: transform .4s ease;
+}
+.cert:hover img {
+  transform: scale(1.1);
+}
+.cert-body {
+  transition: color .3s ease;
+}
+.cert:hover .cert-body {
+  color: #7c3aed; /* Accent color */
+}
+
   </style>
 </head>
 <body>
@@ -393,7 +410,7 @@
     <!-- <p class="section-sub">Upload your certificate images or use PDF thumbnails.</p> -->
     <div class="certs">
       <article class="cert reveal">
-        <img src="nptel.png"/>
+        <a href="NPTEL-DBMS.pdf"><img src="nptel.png"/></a>
         <div class="cert-body">
           <h3>NPTEL - DBMS</h3>
           <p class="muted">NPTEL • 2024</p>
@@ -404,7 +421,7 @@
         </footer> -->
       </article>
       <article class="cert reveal">
-        <img src="javabasic.png" alt="Certificate preview"/>
+        <a href="java_basic certificate.pdf"><img src="javabasic.png" alt="Certificate preview"/></a>
         <div class="cert-body">
           <h3>Java Basic</h3>
           <p class="muted">Hackerrank • 2024</p>
@@ -415,7 +432,7 @@
         </footer> -->
       </article>
       <article class="cert reveal">
-        <img src="problem.png"/>
+        <a href="problem_solving_basic certificate.pdf"><img src="problem.png"/></a>
         <div class="cert-body">
           <h3>Problem Solving Basic</h3>
           <p class="muted">Hackerrank • 2024</p>
@@ -426,7 +443,7 @@
         </footer> -->
       </article>
       <article class="cert reveal">
-        <img src="pyint.png"/>
+        <a href="pythonintermediate_23it115.pdf"><img src="pyint.png"/></a>
         <div class="cert-body">
           <h3>Python Intermediate</h3>
           <p class="muted">Datacamp • 2024</p>
@@ -437,7 +454,7 @@
         </footer> -->
       </article>
       <article class="cert reveal">
-        <img src="pybasic.png"/>
+        <a href="certificate_python-basic.pdf"><img src="pybasic.png"/></a>
         <div class="cert-body">
           <h3>Python Basic</h3>
           <p class="muted">Datacamp • 2024</p>
@@ -448,7 +465,7 @@
         </footer> -->
       </article>
       <article class="cert reveal">
-        <img src="static.png"/>
+        <a href="certificate_introtostatistics.pdf"><img src="static.png"/></a>
         <div class="cert-body">
           <h3>Introduction to Statistics</h3>
           <p class="muted">Datacamp • 2024</p>
