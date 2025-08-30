@@ -205,6 +205,20 @@
 .cert:hover .cert-body {
   color: #7c3aed; /* Accent color */
 }
+.project {
+  transition: transform .3s ease, box-shadow .3s ease;
+  cursor: pointer;
+}
+.project:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
+}
+.project .thumb img {
+  transition: transform .4s ease;
+}
+.project:hover img {
+  transform: scale(1.08);
+}
 
   </style>
 </head>
